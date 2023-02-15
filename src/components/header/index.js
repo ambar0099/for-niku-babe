@@ -7,10 +7,13 @@ const headerData = [{
     redirect: '/'
 },{
     name: 'Details',
-    redirect: '/coupons'
+    redirect: '/details'
 },{
     name: 'Share',
     redirect: '/social'
+},{
+    name: 'Coupons',
+    redirect: '/coupons'
 },{
     name: 'Thanks',
     redirect: '/thanks'

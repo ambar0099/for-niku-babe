@@ -1,31 +1,23 @@
 @import '../../styles/variables';
 
 #view-header{
-    color: $view-header-color;
-    font-size: $view-header-font-sz;
     text-transform: uppercase;
     text-shadow: none;
     padding-bottom: 5px;
     border-bottom: solid 2px #d4d4d4;
-    font-weight: 300;
+    cursor: pointer;
 }
 
 .view-title{
-    color: $view-header-color;
-    font-size: $view-title-font-sz;
-    font-weight: 600;
-    font-family: fangsong;
     line-height: normal;
     margin-top: 1em;
+    cursor: pointer;
 }
 
 .view-secondary-title{
-    color: $view-header-color;
-    font-size: $view-secondary-title-font-sz;
-    font-weight: 600;
-    font-family: fangsong;
     line-height: normal;
     margin-top: 1em;
+    cursor: pointer;
 }
 
 /* Icons */
@@ -33,6 +25,7 @@
     margin-right: 5em;
     width: inherit;
     padding: 10px;
+    cursor: pointer;
 }
 
 .icon-outline{
@@ -122,12 +115,17 @@ hr {
 
 /* button */
 .app-btn{
-    background: $primary-btn-bk;
-    border: none;
     width: 100%;
     padding: 10px;
-    border-radius: $border-radius;
-    color: white;
     text-transform: uppercase;
-    font-weight: 600;
+}
+
+.hover-edit:hover, .hover-edit:focus-within, input:focus::placeholder, input:hover::placeholder  {
+    outline: 2px dashed red !important;
+    outline-offset: -1px !important;
+}
+
+.icon-selected {
+    border: 1px rgba(0, 173, 196, 0.5019607843) solid;
+    background: lightgrey;
 }

@@ -1,28 +1,39 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, } from 'react-redux';
+import '../../shared/shared.scss';
 
 import ViewHeader from '../../shared/view_header';
 import ViewTitle from '../../shared/view_title';
 import InputText from '../../shared/input_text';
 import AppButton from '../../shared/app_btn';
 
-const WelcomeScreen = () => {
-    const emailDispatch = useDispatch();
+const WelcomeScreen = (props) => {
+    const screenDetails = props?.dbObject?.welcomeScreen?.elements;
+    const [selectedElement, setSelectedElement] = useState({});
 
-    const handleInputChange = (event) => {
-        emailDispatch({
-            type: 'UPDATE_EMAIL',
-            payload: event.target.value
-        })
+    const contentClicked = (elementName, elementType) => {
+        props.elementClicked({ elementName: elementName, elementType: elementType, screen: 'welcomeScreen' });
     }
 
-    return(
+    const buttonData = () => {
+        return { buttonData: screenDetails.welcomeScreenSubmitButton, buttonTextData: screenDetails.welcomeScreenSubmitButtonText };
+    }
+
+
+    return (
         <React.Fragment>
-            <ViewHeader title='Refer a friend' />
-            <ViewTitle className='view-secondary-title' title='We are launching [XX Product xx] on [xx Date xx].' />
-            <p>Please provide your email below and we'll email you to give you access to a promotion t share with your friends when it's available</p>
-            <InputText placeholder='Your email address' onChange={(e) => handleInputChange(e)} />
-            <AppButton>Submit</AppButton>
+            <ViewHeader title={screenDetails.welcomeScreenHeading.text} style={screenDetails.welcomeScreenHeading.style}
+                field="welcomeScreenHeading" click={contentClicked} />
+            <ViewTitle className='view-secondary-title hover-edit' contentEditable='true'
+                onClick={() => contentClicked('welcomeScreenOfferHeading', 'text')}
+                suppressContentEditableWarning="true" title={screenDetails.welcomeScreenOfferHeading.text}
+                style={screenDetails.welcomeScreenOfferHeading.style} />
+            <p className="hover-edit" contentEditable='true' onClick={() => contentClicked('welcomeScreenOfferDetails', 'text')}
+                suppressContentEditableWarning="true" style={screenDetails.welcomeScreenOfferDetails.style}>
+                {screenDetails.welcomeScreenOfferDetails.text}
+            </p>
+            <InputText placeholder={screenDetails.welcomeScreenEmail.text} readOnly />
+            <AppButton data={buttonData()} elemClicked={contentClicked}>{screenDetails.welcomeScreenSubmitButtonText.text}</AppButton>
         </React.Fragment>
     )
 }

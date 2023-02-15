@@ -4,29 +4,29 @@ import { AiFillTwitterCircle, AiFillFacebook, AiFillMail, AiOutlineWhatsApp } fr
 import { BsMessenger } from 'react-icons/bs';
 import { Col, Row } from 'react-bootstrap';
 
-const IconMap = {
-    'facebook': <AiFillFacebook color='#3b5998'/>,
-    'twitter': <AiFillTwitterCircle color='#55acee' />,
-    'gmail': <AiFillMail color='#dc4e41' />,
-    'whatsapp': <AiOutlineWhatsApp color='#43d854'/>,
-    'messenger': <BsMessenger color='#006AFF'/>
-};
 
-const Icons = ({ name }) => {
-    const renderIcon = IconMap[name] || IconMap[0];
-    return(
-        <div className='icon-cnt'>
-            <div className='icon-outline'>
-                {renderIcon}
-            </div>
-        </div>
-    )
-}
 
 const GroupIcon = (props) => {
     const columns = props.columns || 2;
     const rows = props.rows || 2;
     const icons = props.iconData || ['facebook'];
+    const IconMap = {
+        'facebook': <AiFillFacebook color='#3b5998'/>,
+        'twitter': <AiFillTwitterCircle color='#55acee' />,
+        'gmail': <AiFillMail color='#dc4e41' />,
+        'whatsapp': <AiOutlineWhatsApp color='#43d854'/>,
+        'messenger': <BsMessenger color='#006AFF'/>
+    };
+    const Icons = ({ name }) => {
+        const renderIcon = IconMap[name] || IconMap[0];
+        return(
+            <div className='icon-cnt'>
+                <div  onClick={(event) => {props.iconClicked(event, name) }} className='icon-outline'>
+                    {renderIcon}
+                </div>
+            </div>
+        )
+    }
 
     let rowArray = [];
     let columnArray = [];

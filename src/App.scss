@@ -31,3 +31,17 @@
 .col{
   padding: 0;
 }
+
+.image-widget-container, .content-widget-container {
+  min-height: 50% !important;
+  max-height: 50% !important;
+  // height: 50% !important;
+}
+
+.image-widget-container {
+  padding-right: unset;
+}
+
+.content-widget-container {
+  padding-left: unset;
+}
