@@ -3,30 +3,33 @@ import './home.scss';
 import RightPanel from './right-panel';
 import { Row, Col, Image } from 'react-bootstrap';
 
-const Home = () => {
+const Home = (props) => {
     useEffect(() => {
-        setImage();
     }, []);
 
-    const setImage = () => {
-        // const imageContainer = document.querySelector('.image-widget-container');
-        // if (imageContainer) {
-        //     imageContainer.style.backgroundImage =  "url('https://www.mindinventory.com/blog/wp-content/uploads/2018/07/reactjs-gained.jpg') no-repeat center center fixed";
-        // }
+    const changeImage = () => {
+        document.getElementById('fileid').click();
     }
 
+    const onFileSelect = (event) => {
+        var reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        reader.onload = function (e) {
+            document.querySelector('.home-img').setAttribute('src', e.target.result);
+        }
+    }
     const imagePath = 'https://www.mindinventory.com/blog/wp-content/uploads/2018/07/reactjs-gained.jpg';
+    const containerBorderRadius = props?.dbObject?.roundContainer ? '1em' : '0em';
+    const containerColor = `${props?.dbObject?.containerColor}`;
     return (
         <React.Fragment>
-            <Row className='logo'>
-                <h1>LOGO</h1>
-            </Row>
-            <Row>
-                <Col xs={12} md={6} className="image-widget-container" style={{
-                    "backgroundImage": `url('${imagePath}')`,
-                    "backgroundSize": 'cover', "backgroundPosition": 'center', "backgroundRepeat": 'no-repeat'
-                }}>
-                    {/* <Image className='home-img' src='https://www.mindinventory.com/blog/wp-content/uploads/2018/07/reactjs-gained.jpg' /> */}
+            <Row suppressContentEditableWarning="true" className='logo'
+                style={{ 'borderRadius': containerBorderRadius, 'border': containerColor }}>
+                <Col xs={12} md={6} className="image-widget-container">
+                    <button className="w-10" id='changeImageButton' style={{ 'position': 'absolute' }}
+                        onClick={changeImage}>Change Image</button>
+                    <Image className='home-img' src={imagePath} />
+                    <input id='fileid' type='file' hidden onChange={onFileSelect} />
                 </Col>
                 <Col xs={12} md={6} className="content-widget-container">
                     <RightPanel />

@@ -21,6 +21,27 @@ const SocialMediaSharing = (props) => {
         return { buttonData: screenDetails.socialMediaShareButton, buttonTextData: screenDetails.socialMediaShareButtonText };
     }
     const iconClick = (event, icon) => {
+        switch (icon) {
+            case 'facebook':
+                screenDetails.socialMediaShareButtonText.text = 'Post on Facebook';
+                contentClicked('socialMediaFBIcon', 'icon');
+                break;
+            case 'whatsapp':
+                contentClicked('socialMediaWhatsAppIcon', 'icon');                
+                break;
+            case 'gmail':
+                contentClicked('socialMediaGmailIcon', 'icon');              
+                break;
+            case 'messenger':
+                contentClicked('socialMediaFBMsngrIcon', 'icon');                
+                break;
+            case 'twitter':
+                contentClicked('socialMediaTwitterIcon', 'icon');                
+                break;
+        }
+    }
+
+    const iconContClicked = (event, icon) => {
         const prevSelectedIcon = document.querySelector('.icon-selected');
         if (prevSelectedIcon) {
             prevSelectedIcon.classList.remove('icon-selected');
@@ -29,14 +50,19 @@ const SocialMediaSharing = (props) => {
         switch (icon) {
             case 'facebook':
                 screenDetails.socialMediaShareButtonText.text = 'Post on Facebook';
+                contentClicked('socialMediaFBIconCont', 'button');
                 break;
             case 'whatsapp':
+                contentClicked('socialMediaWhatsAppIconCont', 'button');                
                 break;
             case 'gmail':
+                contentClicked('socialMediaGmailIconCont', 'button');
                 break;
             case 'messenger':
+                contentClicked('socialMediaFBMsngrIconCont', 'button');
                 break;
             case 'twitter':
+                contentClicked('socialMediaTwitterIconCont', 'button');
                 break;
         }
     }
@@ -49,7 +75,8 @@ const SocialMediaSharing = (props) => {
                 title={screenDetails.socialMediaScreenSubHeading.text}
                 style={screenDetails.socialMediaScreenSubHeading.style}
                 onClick={() => contentClicked('socialMediaScreenSubHeading', 'text')} />
-            <GroupIcon iconData={iconsToRender} rows={3} columns={2} iconClicked={iconClick}></GroupIcon>
+            <GroupIcon iconData={iconsToRender} rows={3} columns={2} iconClicked={iconClick} iconContClicked={iconContClicked}
+                dbObject={props.dbObject}></GroupIcon>
             <AppButton data={buttonData()} elemClicked={contentClicked}>{screenDetails.socialMediaShareButtonText.text}</AppButton>
         </React.Fragment>
     )

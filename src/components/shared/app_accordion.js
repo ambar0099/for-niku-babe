@@ -8,32 +8,49 @@ import ItalicHeader from './italic_header';
 
 const CustomToggle = ({ children, eventKey }) => {
     const decoratedOnClick = useAccordionButton(eventKey);
-  
+
     return (
-      <div onClick={decoratedOnClick}>
-        {children}
-      </div>
+        <div onClick={decoratedOnClick}>
+            {children}
+        </div>
     );
-  }
+}
 
 const AppAccordion = (props) => {
 
+    const contentClicked = (elementName, elementType) => {
+        props.elementClicked(elementName, elementType);
+    }
+
+
     const data = props.data;
-    return(
+    return (
         <Accordion defaultActiveKey="0">
             {data && data.map((item, index) => (
                 <Card key={index}>
                     <Card.Header>
-                        <ItalicHeader title={item.title}></ItalicHeader>
-                        <p className='accordion-desc'>{item.discription}</p>
-                        <hr/>
+                        <ItalicHeader title={item.title} contentClicked={contentClicked} dbObject={props.dbObject}></ItalicHeader>
+                        <p className='accordion-desc hover-edit'
+                            onClick={() => contentClicked('couponScreenCpnSubHeader', 'text')}
+                            style={props?.dbObject?.couponsScreen?.elements?.couponScreenCpnSubHeader.style}>
+                            {item.discription}
+                        </p>
+                        <hr />
                         <CustomToggle eventKey={index}>
-                            <small className='toggle-text'><AiOutlineInfoCircle size='20' /> {item.toggleText}</small>
+                            <small className='toggle-text'><AiOutlineInfoCircle size='20' className="hover-edit"
+                                onClick={() => contentClicked('couponScreenCpnIcon', 'icon')} 
+                                style={props?.dbObject?.couponsScreen?.elements?.couponScreenCpnIcon.style}/>
+                                <span className="hover-edit"
+                                    onClick={() => contentClicked('couponScreenCpnIconText', 'text')}
+                                    style={props?.dbObject?.couponsScreen?.elements?.couponScreenCpnIconText.style}>
+                                    {item.toggleText}
+                                </span>
+                            </small>
                         </CustomToggle>
                     </Card.Header>
-                    <Accordion.Collapse eventKey={index}>
-                    <Card.Body>{item.content}</Card.Body>
-                    </Accordion.Collapse>
+                    <Card.Body className="hover-edit"
+                        onClick={() => contentClicked('couponScreenCpnDescription', 'text')}
+                        style={props?.dbObject?.couponsScreen?.elements?.couponScreenCpnDescription.style}>{item.content}</Card.Body>
                 </Card>
             ))}
         </Accordion>

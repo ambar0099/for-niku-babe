@@ -120,9 +120,10 @@ hr {
     text-transform: uppercase;
 }
 
-.hover-edit:hover, .hover-edit:focus-within, input:focus::placeholder, input:hover::placeholder  {
+.hover-edit:hover, .hover-edit:focus-visible, .hover-edit:focus-within, input:hover::placeholder  {
     outline: 2px dashed red !important;
     outline-offset: -1px !important;
+    cursor: pointer;
 }
 
 .icon-selected {

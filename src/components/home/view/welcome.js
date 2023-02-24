@@ -6,6 +6,7 @@ import ViewHeader from '../../shared/view_header';
 import ViewTitle from '../../shared/view_title';
 import InputText from '../../shared/input_text';
 import AppButton from '../../shared/app_btn';
+import Util from '../../shared/util';
 
 const WelcomeScreen = (props) => {
     const screenDetails = props?.dbObject?.welcomeScreen?.elements;
@@ -22,13 +23,15 @@ const WelcomeScreen = (props) => {
 
     return (
         <React.Fragment>
-            <ViewHeader title={screenDetails.welcomeScreenHeading.text} style={screenDetails.welcomeScreenHeading.style}
+            <ViewHeader tabIndex="0" title={screenDetails.welcomeScreenHeading.text}
+            style={screenDetails.welcomeScreenHeading.style}
                 field="welcomeScreenHeading" click={contentClicked} />
-            <ViewTitle className='view-secondary-title hover-edit' contentEditable='true'
+            <ViewTitle className='view-secondary-title hover-edit'
                 onClick={() => contentClicked('welcomeScreenOfferHeading', 'text')}
-                suppressContentEditableWarning="true" title={screenDetails.welcomeScreenOfferHeading.text}
+                title={screenDetails.welcomeScreenOfferHeading.text}
                 style={screenDetails.welcomeScreenOfferHeading.style} />
-            <p className="hover-edit" contentEditable='true' onClick={() => contentClicked('welcomeScreenOfferDetails', 'text')}
+            <p className="hover-edit curosr-pointer" contentEditable='true' 
+                onClick={() => contentClicked('welcomeScreenOfferDetails', 'text')}
                 suppressContentEditableWarning="true" style={screenDetails.welcomeScreenOfferDetails.style}>
                 {screenDetails.welcomeScreenOfferDetails.text}
             </p>
