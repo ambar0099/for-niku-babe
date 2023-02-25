@@ -1,0 +1,7 @@
+version: "0.1.0"
+services:
+  app:
+    build: .
+    ports:
+      - "2000:2000"
+      - "3000:3000"

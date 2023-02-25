@@ -1,45 +1,6 @@
-import './App.scss';
-import React, { useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { configureStore } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
-import Home from './components/home';
-import WelcomeScreen from './components/home/view/welcome';
-import SocialMediaSharing from './components/home/view/social_media';
-import CouponsScreen from './components/home/view/coupons_screen';
-import rootReducer from './state/reducer';
-import Header from './components/header';
-import Footer from './components/footer';
-import SideBar from './components/sidebar/index.js';
-import ThanksScreen from './components/home/view/thanks';
-import DetailsScreen from './components/home/view/details';
-import _ from 'lodash';
-import { GQLQuery } from './query/useGQLQuery';
-import { LOAD_WIDGET } from './query';
-import ACTION from './state/actions';
-import "primereact/resources/themes/lara-light-indigo/theme.css";
-
-//core
-import "primereact/resources/primereact.min.css";
-
-//icons
-import "primeicons/primeicons.css";
-
-const store = configureStore({ reducer: rootReducer });
-
-const App = () => {
-  const { data, isLoading, error } = GQLQuery('widget', LOAD_WIDGET);
-  const dispatch = useDispatch();
-  if (isLoading) return <h4>Loading Widget</h4>
-  if (data && data?.getWidgetInfo?.initial_json) {
-    dispatch({
-      type: ACTION.LOAD_WIDGET,
-      payload: data.getWidgetInfo.initial_json
-    })
-  }
-
-  const dbValues = {
+export const initialState = {
+    "activeScreen": "",
+    "activeElement": "",
     "message": "Retrieved successfully",
     "widget": {
       "id": 7,
@@ -75,7 +36,7 @@ const App = () => {
                 "textDecoration": "none",
                 "fontSize": "24px",
                 "color": "#545454",
-                "fontFamily": "Yesava One",
+                "fontFamily": "Yesava One"
               }
             },
             "welcomeScreenOfferHeading": {
@@ -144,7 +105,7 @@ const App = () => {
                 "textDecoration": "none",
                 "fontSize": "24px",
                 "color": "#545454",
-                "fontFamily": "Yesava One",
+                "fontFamily": "Yesava One"
               }
             },
             "socialMediaScreenSubHeading": {
@@ -266,7 +227,7 @@ const App = () => {
                 "textDecoration": "none",
                 "fontSize": "24px",
                 "color": "#545454",
-                "fontFamily": "Yesava One",
+                "fontFamily": "Yesava One"
               }
             },
             "detailsScreenSubHeading": {
@@ -335,7 +296,7 @@ const App = () => {
                 "textDecoration": "none",
                 "fontSize": "24px",
                 "color": "#545454",
-                "fontFamily": "Yesava One",
+                "fontFamily": "Yesava One"
               }
             },
             "couponsScreenSubHeading": {
@@ -529,37 +490,4 @@ const App = () => {
       "element_id": "somedivtag",
       "coupons": []
     }
-  };
-
-
-  const getData = async () => {
-    return await dbValues;
-  };
-
-  return (
-    <Container fluid>
-      <Router>
-        <Header></Header>
-        <Row>
-          <Col md={10} >
-            <Routes>
-              <Route path='/' element={<Home />}>
-                <Route path="/" element={<WelcomeScreen />}></Route>
-                <Route path="/social" element={<SocialMediaSharing />}></Route>
-                <Route path="/details" element={<DetailsScreen />}></Route>
-                <Route path="/coupons" element={<CouponsScreen />}></Route>
-                <Route path="/thanks" element={<ThanksScreen />}></Route>
-              </Route>
-            </Routes>
-          </Col>
-          <Col md={2}>
-            <SideBar></SideBar>
-          </Col>
-        </Row>
-        <Footer></Footer>
-      </Router>
-    </Container>
-  );
-}
-
-export default App;
+  }

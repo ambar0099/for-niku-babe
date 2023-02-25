@@ -49,7 +49,7 @@ const DetailsScreen = (props) => {
     return (
         <React.Fragment>
             <ViewHeader title={screenDetails.detailsScreenHeading.text} style={screenDetails.detailsScreenHeading.style}
-            contentEditable='true' suppressContentEditableWarning="true"
+                contentEditable='true' suppressContentEditableWarning="true"
                 field="detailsScreenHeading" click={contentClicked} />
             <ViewTitle className='view-secondary-title hover-edit' contentEditable='true'
                 onClick={() => contentClicked('detailsScreenSubHeading', 'text')}

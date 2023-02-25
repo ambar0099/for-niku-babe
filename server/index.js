@@ -7,6 +7,7 @@ const cors = require('cors');
 const schema = require('./schema/schema');
 
 app.use(cors());
+app.set('port', 2002);
 app.use('/graphql', graphqlHTTP({
     schema,
     graphiql: true
@@ -19,4 +20,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(PORT, () => {
+    console.log('Server started at port:', PORT);
 });
