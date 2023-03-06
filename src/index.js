@@ -6,7 +6,6 @@ import { applyMiddleware, configureStore } from '@reduxjs/toolkit';
 import rootReducer from './state/reducer';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import App from './App';
 import thunk from 'redux-thunk';
 
@@ -15,16 +14,17 @@ const store = configureStore({ reducer: rootReducer }, applyMiddleware(thunk));
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: false,
+      refetchOnWindowFocus: true,
       refetchOnMount: false
     }
   }
-})
+});
+
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <App />
+        <App/>
       </Provider>
     </QueryClientProvider>
   </React.StrictMode>

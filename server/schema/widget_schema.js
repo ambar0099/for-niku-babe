@@ -2,13 +2,13 @@ const graphql = require('graphql');
 const { ObjectType } = require('./any_object');
 const {
     GraphQLObjectType,
-    GrapgQLInt
+    GraphQLInt
 }  = graphql;
 
 const WidgetType = new GraphQLObjectType({
     name: 'Widget',
     fields: () => ({
-        id: { type: graphql.GraphQLInt },
+        id: { type: GraphQLInt },
         initial_json: { type: ObjectType }
     })
 });

@@ -25,20 +25,20 @@ const ColorWidget = ({ color, backgroundColor, borderColor }) => {
 
     const OutSideClick = (ref, handler) => {
         useEffect(() => {
-            const handleOutSideClick = (event) => {
+            const handleClickOutSide = (event) => {
                 if (ref.current && !ref.current.contains(event.target)) {
                     handler();
                 }
             }
-            document.addEventListener('click', handleOutSideClick, true);
+            document.addEventListener('click', handleClickOutSide, true);
             return () => {
-                document.removeEventListener('click', handleOutSideClick, true);
+                document.removeEventListener('click', handleClickOutSide, true);
             }
         }, [ref, handler]);
     }
 
     const onBgChange = (event) => setBgColor(event.target.value);
-    const onBrChange = (event) => setBgColor(event.target.value);
+    const onBrChange = (event) => setBrColor(event.target.value);
 
     OutSideClick(bgRef, () => bgColorPickerToggle(false));
     OutSideClick(brRef, () => brColorPickerToggle(false));
@@ -79,8 +79,8 @@ const ColorWidget = ({ color, backgroundColor, borderColor }) => {
                             onClick={() => { brColorPickerToggle(true) }}
                         />
 
-                        {isBgColorPickerOpen && (
-                            <div className='color-picker-popover' ref={bgRef}>
+                        {isBrColorPickerOpen && (
+                            <div className='color-picker-popover' ref={brRef}>
                                 <HexColorPicker color={brColor} onChange={setBrColor} />
                             </div>
                         )}

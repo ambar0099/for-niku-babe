@@ -19,7 +19,7 @@ const giftCard = (state = initialState, action) => {
             let element = elements[state.activeElement];
             init_json = {
                 ...init_json,
-                [state.activeElement]: {
+                [state.activeScreen]: {
                     elements: {
                         ...elements,
                         [state.activeElement]: {
